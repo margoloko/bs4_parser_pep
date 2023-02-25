@@ -115,7 +115,8 @@ def pep(session):
         get_status = status_element.find(string=re.compile(r'^Status$')).parent
         status_tag = get_status.find_next_sibling('dd').text
 
-        if abbr_status is not None and status_tag not in EXPECTED_STATUS[abbr_status]:
+        if abbr_status is not None and \
+           status_tag not in EXPECTED_STATUS[abbr_status]:
             error_msg = f'Не найден статус: {status_tag} в ожидаемых'
             logging.info(error_msg)
             continue
@@ -159,7 +160,6 @@ def main():
     # Если из функции вернулись какие-то результаты,
     if results is not None:
         control_output(results, args)
-    # Логируем завершение работы парсера.
     logging.info('Парсер завершил работу.')
 
 
