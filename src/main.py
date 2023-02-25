@@ -4,6 +4,7 @@ import requests_cache
 
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup as BS
+from collections import defaultdict
 from tqdm import tqdm
 
 from configs import configure_argument_parser, configure_logging
@@ -85,7 +86,6 @@ def download(session):
     response = session.get(archive_url)
     with open(archive_path, 'wb') as file:
         file.write(response.content)
-    print(filename)
     logging.info(f'Архив был загружен и сохранён: {archive_path}')
 
 
@@ -97,7 +97,7 @@ def pep(session):
     get_section = find_tag(soup, 'section', attrs={'id': 'numerical-index'})
     get_table = find_tag(get_section, 'tbody')
     get_rows = get_table.find_all('tr')
-    count_dict = {}
+    pep_count = defaultdict(int)
     for row in get_rows:
         td_tag = find_tag(row, 'td')
         href_tag = td_tag.find_next_sibling('td')
@@ -115,17 +115,17 @@ def pep(session):
         get_status = status_element.find(string=re.compile(r'^Status$')).parent
         status_tag = get_status.find_next_sibling('dd').text
 
-        if abbr_status is not None and \
-           status_tag not in EXPECTED_STATUS[abbr_status]:
+        if (abbr_status is not None and
+           status_tag not in EXPECTED_STATUS.get(abbr_status, [])):
             error_msg = f'Не найден статус: {status_tag} в ожидаемых'
             logging.info(error_msg)
             continue
         for abbr, status in EXPECTED_STATUS.items():
             if status_tag in status:
-                count_dict[abbr] = count_dict.get(abbr, 0) + 1
-    count_dict['Total'] = sum([value for value in count_dict.values()])
+                pep_count[status[0]] += 1
+    pep_count['Total'] = sum([value for value in pep_count.values()])
     result = [('Статус', 'Количество')]
-    result.extend(count_dict.items())
+    result.extend(pep_count.items())
     return result
 
 
