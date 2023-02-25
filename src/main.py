@@ -98,7 +98,7 @@ def pep(session):
     get_table = find_tag(get_section, 'tbody')
     get_rows = get_table.find_all('tr')
     pep_count = defaultdict(int)
-    for row in get_rows:
+    for row in tqdm(get_rows, desc='Parsing PEP'):
         td_tag = find_tag(row, 'td')
         href_tag = td_tag.find_next_sibling('td')
         td_tag = td_tag.text
