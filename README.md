@@ -28,7 +28,7 @@ pip install -r requirements.txt
 Пример запуска:
 
 ```
-python parser.py -m whats-new
+python main.py -m whats-new
 ```
 
 ### download
@@ -38,7 +38,7 @@ python parser.py -m whats-new
 Пример запуска:
 
 ```
-python parser.py -m download
+python main.py -m download
 ```
 
 ### pep
@@ -48,10 +48,10 @@ python parser.py -m download
 Пример запуска:
 
 ```
-python parser.py -m pep
+python main.py -m pep
 ```
 
-### Используемые библиотеки
+### Используемые библиотеки:
 - logging — для ведения логов.
 - re — для работы с регулярными выражениями.
 - requests_cache — для кэширования запросов.
