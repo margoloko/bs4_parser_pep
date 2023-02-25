@@ -28,7 +28,7 @@ pip install -r requirements.txt
 Пример запуска:
 
 ```
-python main.py -m whats-new
+python main.py whats-new
 ```
 
 ### download
@@ -38,7 +38,7 @@ python main.py -m whats-new
 Пример запуска:
 
 ```
-python main.py -m download
+python main.py download
 ```
 
 ### pep
@@ -48,7 +48,7 @@ python main.py -m download
 Пример запуска:
 
 ```
-python main.py -m pep
+python main.py pep
 ```
 
 ### Используемые библиотеки:
