@@ -58,3 +58,5 @@ python main.py pep
 - urllib.parse — для работы с URL.
 - bs4 — для работы с HTML.
 - tqdm — для вывода прогресса при обходе списка.
+### Author:
+Balakhonova Marina
