@@ -8,6 +8,14 @@ from constants import BASE_DIR, DATETIME_FORMAT
 
 
 def control_output(results, cli_args):
+    """
+    Функция управляет выводом результатов парсинга.
+
+    :param results: список списков с результатами парсинга
+    :type results: list[list[str]] или list[tuple[str]]
+    :param cli_args: объект с аргументами командной строки
+    :type cli_args: argparse.Namespace.
+    """
     output = cli_args.output
     if output == 'pretty':
         pretty_output(results)
@@ -18,11 +26,23 @@ def control_output(results, cli_args):
 
 
 def default_output(results):
+    """
+    Функция выводит результаты парсинга в консоль.
+
+    :param results: список списков с результатами парсинга
+    :type results: list[list[str]] или list[tuple[str]].
+    """
     for row in results:
         print(*row)
 
 
 def pretty_output(results):
+    """
+    Функция выводит результаты парсинга в виде красивой таблицы.
+
+    :param results: список списков с результатами парсинга
+    :type results: list[list[str]] или list[tuple[str]].
+    """
     table = PrettyTable()
     table.field_names = results[0]
     table.align = 'l'
