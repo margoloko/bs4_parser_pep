@@ -26,12 +26,7 @@ def control_output(results, cli_args):
 
 
 def default_output(results):
-    """
-    Функция выводит результаты парсинга в консоль.
-
-    :param results: список списков с результатами парсинга
-    :type results: list[list[str]] или list[tuple[str]].
-    """
+    """Функция выводит результаты парсинга в консоль."""
     for row in results:
         print(*row)
 
@@ -39,9 +34,6 @@ def default_output(results):
 def pretty_output(results):
     """
     Функция выводит результаты парсинга в виде красивой таблицы.
-
-    :param results: список списков с результатами парсинга
-    :type results: list[list[str]] или list[tuple[str]].
     """
     table = PrettyTable()
     table.field_names = results[0]
@@ -52,6 +44,7 @@ def pretty_output(results):
 
 
 def file_output(results, cli_args):
+    """Функция сохраняет результаты парсинга в файл."""
     results_dir = BASE_DIR / 'results'
     results_dir.mkdir(exist_ok=True)
     # Получаем режим работы парсера из аргументов командной строки.
