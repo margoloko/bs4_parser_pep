@@ -18,17 +18,13 @@ def control_output(results, cli_args):
 
 
 def default_output(results):
-    # Печатаем список results построчно.
     for row in results:
         print(*row)
 
 
 def pretty_output(results):
-    # Инициализируем объект PrettyTable.
     table = PrettyTable()
-    # В качестве заголовков устанавливаем первый элемент списка.
     table.field_names = results[0]
-    # Выравниваем всю таблицу по левому краю.
     table.align = 'l'
     # Добавляем все строки, начиная со второй (с индексом 1).
     table.add_rows(results[1:])
@@ -40,7 +36,6 @@ def file_output(results, cli_args):
     results_dir.mkdir(exist_ok=True)
     # Получаем режим работы парсера из аргументов командной строки.
     parser_mode = cli_args.mode
-    # Получаем текущие дату и время.
     now = dt.datetime.now()
     # Сохраняем текущие дату-время в указанном формате.
     # Результат будет выглядеть вот так: 2021-06-18_07-40-41.
