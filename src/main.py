@@ -14,6 +14,8 @@ from utils import get_response, find_tag
 
 
 def whats_new(session):
+    """Функция парсит страницу и возвращает список кортежей,
+    содержащих ссылку на статью, заголовок и автора."""
     whats_new_url = urljoin(MAIN_DOC_URL, 'whatsnew/')
     response = get_response(session, whats_new_url)
     if response is None:
@@ -44,6 +46,8 @@ def whats_new(session):
 
 
 def latest_versions(session):
+    """Функция парсит страницу документации Python и возвращает список
+    кортежей, содержащих ссылку на документацию, версию и статус."""
     response = get_response(session, MAIN_DOC_URL)
     if response is None:
         return
@@ -70,6 +74,7 @@ def latest_versions(session):
 
 
 def download(session):
+    """Функция загружает архив с PDF-версией документации Python."""
     downloads_url = urljoin(MAIN_DOC_URL, 'download.html')
     response = get_response(session, downloads_url)
     if response is None:
@@ -90,6 +95,8 @@ def download(session):
 
 
 def pep(session):
+    """Функция парсит страницу PEP и возвращает список кортежей,
+    содержащих статус и количество PEP."""
     response = get_response(session, PEP_URL)
     if response is None:
         return
@@ -149,15 +156,12 @@ def main():
     logging.info(f'Аргументы командной строки: {args}')
     # Создание кеширующей сессии.
     session = requests_cache.CachedSession()
-    # Если был передан ключ '--clear-cache', то args.clear_cache == True.
     if args.clear_cache:
         # Очистка кеша.
         session.cache.clear()
     # Получение из аргументов командной строки нужного режима работы.
     parser_mode = args.mode
-    # Поиск и вызов нужной функции по ключу словаря.
     results = MODE_TO_FUNCTION[parser_mode](session)
-    # Если из функции вернулись какие-то результаты,
     if results is not None:
         control_output(results, args)
     logging.info('Парсер завершил работу.')
