@@ -1,4 +1,4 @@
-# Проект парсинга pep
+# Проект парсинга PEP
 
 Этот проект является парсером документации Python, реализованным на Python.
 
@@ -58,5 +58,6 @@ python main.py pep
 - urllib.parse — для работы с URL.
 - bs4 — для работы с HTML.
 - tqdm — для вывода прогресса при обходе списка.
+
 ### Author:
-Balakhonova Marina
+[Balakhonova Marina](https://github.com/margoloko)
